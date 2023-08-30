@@ -89,7 +89,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public ResponseEntity<?> getPublisherNotDeletedService() {
+    public ResponseEntity<?> getPublisherNotDeletedService(Boolean isDeleted) {
         List<Publisher> publishers = publisherRepository.getDeletedPublisherByDelete();
 
         return ResponseHander.responseData(200, "success", publishers);

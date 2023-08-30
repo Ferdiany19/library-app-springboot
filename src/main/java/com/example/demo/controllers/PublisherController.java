@@ -24,46 +24,46 @@ public class PublisherController {
 
     @PostMapping
     public ResponseEntity<?> createPublishers(@RequestBody PublisherRequest request) {
-        try {
-            return publisherService.addPublisherService(request);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return publisherService.addPublisherService(request);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @GetMapping
     public ResponseEntity<?> getPublishers() {
-        try {
-            return publisherService.getPublishersService();
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return publisherService.getPublishersService();
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPublisherById(@PathVariable String id) {
-        try {
-            return publisherService.getPublisherByIdService(id);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return publisherService.getPublisherByIdService(id);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @GetMapping("/name/{name}")
     public ResponseEntity<?> getPublisherByName(@PathVariable String name) {
-        try {
-            return publisherService.getPublisherByNameService(name);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return publisherService.getPublisherByNameService(name);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePublisherById(@PathVariable String id) {
-        try {
-            return publisherService.deletePublisherByIdService(id);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return publisherService.deletePublisherByIdService(id);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 }

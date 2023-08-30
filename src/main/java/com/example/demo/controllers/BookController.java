@@ -25,7 +25,7 @@ public class BookController {
     BookService bookService;
 
     @PostMapping
-    public ResponseEntity<?> createBook(@RequestBody BookRequest request) {
+    public ResponseEntity<?> createBook(@RequestBody @Valid BookRequest request) {
         try {
             return bookService.addBookService(request);
         } catch (Exception e) {

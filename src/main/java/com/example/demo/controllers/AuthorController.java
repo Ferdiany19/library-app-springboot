@@ -14,6 +14,8 @@ import com.example.demo.payloads.req.AuthorRequest;
 import com.example.demo.payloads.res.ResponseHander;
 import com.example.demo.service.author.AuthorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {
@@ -21,38 +23,39 @@ public class AuthorController {
     AuthorService authorService;
 
     @PostMapping
-    public ResponseEntity<?> createAuthor(@RequestBody AuthorRequest request) {
-        try {
-            return authorService.addAuthorService(request);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+    public ResponseEntity<?> createAuthor(@RequestBody @Valid AuthorRequest request) {
+        // try {
+        ResponseEntity<?> responseEntity = authorService.addAuthorService(request);
+        return responseEntity;
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @GetMapping
     public ResponseEntity<?> getAuthors() {
-        try {
-            return authorService.getAuthorsService();
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return authorService.getAuthorsService();
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAuthorById(@PathVariable String id) {
-        try {
-            return authorService.getAuthorByIdService(id);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return authorService.getAuthorByIdService(id);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAuthorById(@PathVariable String id) {
-        try {
-            return authorService.deleteAuthorByIdService(id);
-        } catch (Exception e) {
-            return ResponseHander.responseError(500, e.getMessage(), null);
-        }
+        // try {
+        return authorService.deleteAuthorByIdService(id);
+        // } catch (Exception e) {
+        // return ResponseHander.responseError(500, e.getMessage(), null);
+        // }
     }
 }
