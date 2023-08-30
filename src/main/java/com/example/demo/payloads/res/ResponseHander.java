@@ -25,4 +25,13 @@ public class ResponseHander {
 
         return ResponseEntity.status(statusCode).body(body);
     }
+
+    public static ResponseEntity<?> responseMessage(Integer statusCode, String message, Boolean isSuccess) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("status", statusCode);
+        body.put("success", isSuccess);
+        body.put("message", message);
+
+        return ResponseEntity.status(statusCode).body(body);
+    }
 }
