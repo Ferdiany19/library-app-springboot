@@ -1,6 +1,5 @@
 package com.example.demo.service.user;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
