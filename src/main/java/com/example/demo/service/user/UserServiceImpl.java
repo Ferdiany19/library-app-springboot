@@ -1,11 +1,13 @@
 package com.example.demo.service.user;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.custom.EntitityFoundException;
 import com.example.demo.models.User;
 import com.example.demo.payloads.req.LoginRequest;
 import com.example.demo.payloads.req.RegisterRequest;
@@ -21,25 +23,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<?> registerUserService(RegisterRequest request) {
 
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new NoSuchElementException("email sudah ada");
+        }
+
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new EntitityFoundException("username sudah ada");
+        }
         User user = new User(request.getUsername(), request.getEmail(), request.getPassword());
         userRepository.save(user);
 
-        return ResponseHander.responseData(200, "Success register user", user);
+        return ResponseHander.responseData(201, "Success register user", user);
 
     }
 
     @Override
     public ResponseEntity<?> loginUserService(LoginRequest request) {
         User userEmail = userRepository.findByEmail(request.getEmail());
-        User userPassword = userRepository.findByPassword(request.getPassword());
         if (userEmail == null) {
-            throw new NoSuchElementException("Email is not found!");
+            throw new EntitityFoundException("Email is not found!");
         }
-        if (userPassword == null) {
-            throw new NoSuchElementException("Password not found!");
+        if (!userEmail.getPassword().equals(request.getPassword())) {
+            throw new NoSuchElementException("Password doesn't match!");
         }
-
-        User user = new User(null, null, null);
         return ResponseHander.responseMessage(200, "Login Success", true);
     }
 

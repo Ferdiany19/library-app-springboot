@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.demo.exception.custom.EntitityFoundException;
 import com.example.demo.payloads.res.ResponseHander;
 
 @RestControllerAdvice
@@ -36,5 +37,10 @@ public class CustomExceptionHandler {
             errorMap.put(err.getField(), err.getDefaultMessage());
         });
         return ResponseHander.responseError(e.getStatusCode().value(), "error validation", errorMap);
+    }
+
+    @ExceptionHandler(value = EntitityFoundException.class)
+    public ResponseEntity<?> handleEntityFoundException(EntitityFoundException e) {
+        return ResponseHander.responseError(400, e.getMessage(), null);
     }
 }

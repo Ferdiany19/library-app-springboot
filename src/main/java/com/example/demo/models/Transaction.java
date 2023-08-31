@@ -6,43 +6,40 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// relasi many to one di user dan book
-
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "transaction")
+public class Transaction {
     @Id
     @UuidGenerator
     private String id;
 
-    @Column(length = 100, unique = true)
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    @Column(length = 100, unique = true)
-    private String email;
-
-    @Column(length = 100)
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    private Boolean isDeleted = false;
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
+    public Transaction(Book book, User user) {
+        this.book = book;
+        this.user = user;
     }
-
 }
